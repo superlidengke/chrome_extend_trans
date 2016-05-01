@@ -1,0 +1,25 @@
+body{
+background-color:#F5F5F5;
+}
+#news{
+
+font-size: 20px;
+
+word-spacing:2px;
+line-height:35px;
+margin:80px;
+}
+#meaning{
+position:absolute;
+background-color:#F8F8F8;
+ border: 1px solid #cedd97;
+    font-family: verdana, arial;
+    font-size: 14px;
+    line-height:20px;
+    color: #494949;
+    z-index: 9000005;
+    background: #fff;
+    width: 258px;
+    padding: 10px;
+    text-align: left;
+}

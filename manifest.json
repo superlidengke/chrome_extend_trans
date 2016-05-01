@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+
+  "name": "Translate On Line",
+  "description": "This extension shows the meaning of the selected word",
+  "version": "1.0",
+
+  "content_scripts": [
+    {
+        "matches": [ "*://*.jp/*","http://jp.pickshell.com/*"],
+        "js": ["jquery-2.1.1.min.js","translate.js"],
+        "css": ["main.css"]
+    }
+]
+}
