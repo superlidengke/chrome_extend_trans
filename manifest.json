@@ -7,8 +7,8 @@
 
   "content_scripts": [
     {
-        "matches": [ "*://*.jp/*","http://jp.pickshell.com/*"],
-        "js": ["jquery-2.1.1.min.js","translate.js"],
+        "matches": [  "*://*.jp/*","http://jp.pickshell.com/*","http://localhost/jp/*"],
+        "js": ["jquery-2.1.1.min.js","translate.js","jquery.md5.js"],
         "css": ["main.css"]
     }
 ]

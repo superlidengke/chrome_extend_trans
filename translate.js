@@ -1,4 +1,27 @@
-//console.debug("I am coming!");
+var wordName;	
+var next_ready=true;
+HJ ={};
+
+HJ.fun = {
+	// ajax回调函数
+	jsonCallBack : function(json) {
+		showMeaning(json.content);
+		add(wordName, json.content);
+		next_ready=true;
+		// localStorage.result = json.content;
+		// console.debug(localStorage["result"]);
+		/*
+		$.post("http://localhost/redbag/test/savedata.php", { meaning: json.content },
+				   function(data){
+					 
+				   });
+				   */
+	},
+	changeLanguage : function() {
+
+	},
+};
+
 var wordMap={
 		MAX_NUM:50,
 		_keys:new Array(),
@@ -13,6 +36,7 @@ var wordMap={
 		}
 		return false;//不包含此元素
 	};
+	/*
 	var add= function(key, value) {
 		//若已存在，则不进行任何操作
 		if(is_exist(key)){
@@ -30,8 +54,13 @@ var wordMap={
 	var getValue=function(key){
 		return wordMap._values[key];
 	}
-
-
+*/
+	var add= function(key, value) {
+		localStorage[key]=value;
+	}
+	var getValue=function(key){
+		return localStorage[key];
+	}
 
 
 var funGetSelectTxt = function() {
@@ -47,7 +76,7 @@ var boxleft;
 var boxtop;
 var leftPt;
 var topPt;
-	
+
 	function showMeaning(data){
 		 $("#meaning").html(data);
 	     var meaningBox=document.getElementById("meaning");
@@ -58,17 +87,37 @@ var topPt;
 	}
 	
 	function lookup(param){
-		var nameVal=getValue(param);
-		if(nameVal){
-			showMeaning(nameVal);
-		}else{
-			$.post("http://jp.pickshell.com:8080/jplook/ajaxwordlookup", { wordName: param },
-					   function(data){
-						 showMeaning(data);
-						 add(param,data);
-					   });
+		if(param.length>15){
+			return;
 		}
-		
+		var nameVal = getValue(param);
+		if (nameVal) {
+			showMeaning(nameVal);
+		} else {
+			if(next_ready==false){
+				return;//前一个词处理完之前，不能改变全局变量wordName的值，否则单词与解释对应不上
+			}
+			wordName=param;		
+			next_ready=false;
+			var query_url = "http://dict.hjenglish.com/services/simpleExplain/jp_simpleExplain.ashx?type=jc&w="
+					+ param;
+			// showMeaning(data);
+			// add(param, data);
+			$.ajax({
+				type : "get",
+				async : true,
+				url : query_url,
+				//dataType : "jsonp",
+				//jsonp : "callback",// 传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+				success : function(json) {
+					eval(json);				
+				},
+				error : function(data) {
+				}
+			});
+
+		}
+	 
 	}
 	var selectedTranslate = function(eleContainer) {
 		eleContainer = eleContainer || document;
