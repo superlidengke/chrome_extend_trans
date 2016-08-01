@@ -5,8 +5,13 @@ HJ ={};
 HJ.fun = {
 	// ajax回调函数
 	jsonCallBack : function(json) {
-		showMeaning(json.content);
-		add(wordName, json.content);
+		var meaning = json.content;
+		showMeaning(meaning);
+		
+		if(!meaning.includes('hjd_noresult')){
+			add(wordName, json.content);
+		}
+		
 		next_ready=true;
 		// localStorage.result = json.content;
 		// console.debug(localStorage["result"]);
