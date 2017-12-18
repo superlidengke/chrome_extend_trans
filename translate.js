@@ -109,7 +109,7 @@ var topPt;
 	}
 	function lookupFromMine(param){
 		console.debug("will look up soon")
-		$.post("http://localhost/jp/index.php/Home/Dict/simple", {name:param},
+		$.post("https://localhost/jp/index.php/Home/Dict/simple", {name:param},
 			function(data){
 				showMeaning(data);
 				console.debug("successfully lookup")

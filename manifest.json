@@ -4,7 +4,7 @@
   "name": "Translate On Line",
   "description": "This extension shows the meaning of the selected word",
   "version": "1.0",
- "permissions": [ "http://dict.hjenglish.com/*","http://localhost/jp/*"],
+ "permissions": [ "http://dict.hjenglish.com/*","http://localhost/jp/*","https://localhost/jp/*"],
   "content_scripts": [
     {
         "matches": [  "*://*.jp/*","http://jp.pickshell.com/*","http://localhost/jp/test.html"],
